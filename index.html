@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ÁBICA — Muebles & Espacios Contemporáneos | Tienda Virtual</title>
+  <meta name="description" content="Tienda virtual de muebles contemporáneos en roble macizo, lino natural y diseño escandinavo cálido. Explora nuestro catálogo interactivo con despacho asegurado a toda Colombia.">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Barra de Anuncio Superior -->
+  <aside class="top-announcement" aria-label="Aviso comercial">
+    <div class="container">
+      <span>Envío gratis por compras superiores a <strong>$ 2.500.000 COP</strong> | Fabricación artesanal y 5 años de garantía</span>
+    </div>
+  </aside>
+
+  <!-- Encabezado Principal -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-container">
+      
+      <!-- Logotipo y Nombre Comercial -->
+      <a href="#" class="brand-logo" aria-label="ÁBICA Muebles — Inicio">
+        <span class="brand-symbol" aria-hidden="true">Á</span>
+        <div class="brand-text">
+          <span class="brand-name">ÁBICA</span>
+          <span class="brand-slogan">Muebles Contemporáneos</span>
+        </div>
+      </a>
+
+      <!-- Menú de Navegación de Escritorio -->
+      <nav class="main-nav" aria-label="Navegación principal">
+        <ul class="nav-links">
+          <li><a href="#catalogSection" class="nav-link active">Catálogo</a></li>
+          <li><a href="#collectionsSection" class="nav-link">Colecciones</a></li>
+          <li><a href="#inspirationSection" class="nav-link">Inspiración</a></li>
+          <li><a href="#benefitsSection" class="nav-link">Nosotros</a></li>
+          <li><a href="#faqSection" class="nav-link">Preguntas Frecuentes</a></li>
+        </ul>
+      </nav>
+
+      <!-- Acciones de Encabezado (Búsqueda, Favoritos, Carrito) -->
+      <div class="header-actions">
+        <!-- Botón Acceso Rápido a Búsqueda -->
+        <a href="#catalogSection" class="header-action-btn" title="Buscar en catálogo" aria-label="Buscar en catálogo" onclick="document.getElementById('catalogSearchInput').focus();">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </a>
+
+        <!-- Botón Favoritos -->
+        <button id="headerWishlistBtn" class="header-action-btn" title="Ver Favoritos" aria-label="Abrir lista de deseos">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+          <span id="wishlistCountBadge" class="action-badge">0</span>
+        </button>
+
+        <!-- Botón Carrito de Compras -->
+        <button id="headerCartBtn" class="header-action-btn" title="Ver Carrito de Compras" aria-label="Abrir carrito de compras">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <span id="cartCountBadge" class="action-badge">0</span>
+        </button>
+
+        <!-- Botón Menú Móvil -->
+        <button id="mobileMenuToggle" class="mobile-menu-btn" aria-label="Abrir menú de navegación móvil">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="heroSection">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-tagline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <span>Nueva Colección 2026 — Hábitat Sereno</span>
+        </div>
+        <h1 class="hero-title">
+          Muebles que transforman tu espacio en un <span>santuario</span>
+        </h1>
+        <p class="hero-description">
+          Diseñamos piezas atemporales en roble macizo, lino europeo y acabados artesanales. Armonía visual, confort duradero y conciencia ecológica para el hogar contemporáneo.
+        </p>
+        <div class="hero-actions">
+          <a href="#catalogSection" class="btn btn--primary">
+            <span>Explorar Catálogo</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="#collectionsSection" class="btn btn--secondary">
+            <span>Ver Colecciones</span>
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat-item">
+            <span class="hero-stat-value">100%</span>
+            <span class="hero-stat-label">Madera Certificada FSC</span>
+          </div>
+          <div class="hero-stat-item">
+            <span class="hero-stat-value">5 Años</span>
+            <span class="hero-stat-label">Garantía Estructural</span>
+          </div>
+          <div class="hero-stat-item">
+            <span class="hero-stat-value">+14K</span>
+            <span class="hero-stat-label">Hogares Confortables</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Imagen Destacada del Ambiente Hero -->
+      <div class="hero-visual">
+        <div class="hero-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1400&q=85" 
+               alt="Ambiente de sala contemporánea con sofá en lino marfil y mesa de centro en roble macizo"
+               loading="eager">
+        </div>
+        <!-- Card flotante inspiradora -->
+        <div class="hero-floating-card">
+          <div class="floating-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div class="floating-text">
+            <h5>Diseño Ético & Sostenible</h5>
+            <p>Roble macizo secado al horno con aceites botánicos libres de COVs.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Barra Rápida de Categorías (Pills Interactivas) -->
+  <section class="categories-bar-section" aria-label="Filtrado rápido por categoría">
+    <div class="container">
+      <div class="pills-scroll-container" id="categoryPillsContainer">
+        <!-- Renderizado dinámico desde filters.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Catálogo Principal -->
+  <main class="catalog-section" id="catalogSection">
+    <div class="container">
+      
+      <!-- Encabezado del Catálogo -->
+      <header class="catalog-header">
+        <div class="catalog-header__top">
+          <div>
+            <span class="section-tag">Colección Activa</span>
+            <h2 class="section-title">Catálogo de Mobiliario</h2>
+          </div>
+          <span class="filter-label" id="productCountBadge">Cargando catálogo...</span>
+        </div>
+
+        <!-- Barra de Controles (Búsqueda, Filtro Material, Slider Precio, Ordenar) -->
+        <div class="catalog-controls-bar">
+          
+          <!-- Búsqueda en Vivo -->
+          <div class="search-input-wrapper">
+            <span class="search-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </span>
+            <input type="text" 
+                   id="catalogSearchInput" 
+                   class="search-input" 
+                   placeholder="Buscar por sofá, mesa, material..." 
+                   aria-label="Buscar productos">
+            <button id="searchClearBtn" class="search-clear-btn" aria-label="Limpiar búsqueda">&times;</button>
+          </div>
+
+          <!-- Filtro por Material -->
+          <div class="filter-group">
+            <label for="filterMaterialSelect" class="filter-label">Material</label>
+            <select id="filterMaterialSelect" class="filter-select" aria-label="Filtrar por material">
+              <!-- Opciones generadas en filters.js -->
+            </select>
+          </div>
+
+          <!-- Filtro por Rango de Precio -->
+          <div class="price-slider-wrap">
+            <div class="price-slider-header">
+              <span class="filter-label">Precio Máximo</span>
+              <span class="price-display" id="filterPriceDisplay">$ 5.000.000 COP</span>
+            </div>
+            <input type="range" 
+                   id="filterPriceRange" 
+                   class="price-slider" 
+                   min="200000" 
+                   max="5000000" 
+                   step="100000" 
+                   value="5000000" 
+                   aria-label="Filtro de precio máximo">
+          </div>
+
+          <!-- Ordenamiento -->
+          <div class="filter-group">
+            <label for="catalogSortSelect" class="filter-label">Ordenar por</label>
+            <select id="catalogSortSelect" class="filter-select" aria-label="Ordenar productos">
+              <option value="default">Destacados</option>
+              <option value="price-asc">Precio: Menor a Mayor</option>
+              <option value="price-desc">Precio: Mayor a Menor</option>
+              <option value="name-asc">Nombre: A — Z</option>
+              <option value="name-desc">Nombre: Z — A</option>
+              <option value="rating-desc">Mejor Calificados</option>
+            </select>
+          </div>
+
+          <!-- Filtro de Color (Swatches) -->
+          <div class="filter-group">
+            <span class="filter-label">Acabados de Tono</span>
+            <div class="color-swatches-grid" id="filterColorContainer">
+              <!-- Swatches generados dinámicamente -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Chips de Filtros Activos -->
+        <div class="active-filters-row" id="activeFilterChips" style="display: none;">
+          <!-- Chips renderizados dinámicamente -->
+        </div>
+      </header>
+
+      <!-- Cuadrícula de Tarjetas de Productos -->
+      <section class="products-grid" id="productsGrid" aria-label="Lista de productos del catálogo">
+        <!-- Renderizado desde filters.js / products.js -->
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Colecciones Destacadas (Inspiración West Elm / Article) -->
+  <section class="collections-section" id="collectionsSection">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 3rem;">
+        <span class="section-tag" style="justify-content: center;">Espacios & Atmósferas</span>
+        <h2 class="section-title">Colecciones de Temporada</h2>
+        <p class="section-subtitle" style="margin: 0 auto;">
+          Explora composiciones pensadas para integrarse armónicamente en tu estilo de vida.
+        </p>
+      </div>
+
+      <div class="collections-grid">
+        <!-- Colección 1 -->
+        <article class="collection-card" onclick="setCategoryFilter('Sofás y sillones'); document.getElementById('catalogSection').scrollIntoView({behavior: 'smooth'});">
+          <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80" alt="Colección Nórdica Cálida">
+          <div class="collection-card__overlay">
+            <span class="collection-card__tag">Líneas Claras</span>
+            <h3 class="collection-card__title">Colección Nórdica Roble</h3>
+            <span class="collection-card__link">
+              Explorar piezas
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+        </article>
+
+        <!-- Colección 2 -->
+        <article class="collection-card" onclick="setCategoryFilter('Mesas de comedor'); document.getElementById('catalogSection').scrollIntoView({behavior: 'smooth'});">
+          <img src="https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=800&q=80" alt="Colección Comedor Orgánico">
+          <div class="collection-card__overlay">
+            <span class="collection-card__tag">Reunión & Sobremesa</span>
+            <h3 class="collection-card__title">Comedores Orgánicos</h3>
+            <span class="collection-card__link">
+              Explorar piezas
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+        </article>
+
+        <!-- Colección 3 -->
+        <article class="collection-card" onclick="setCategoryFilter('Camas y dormitorios'); document.getElementById('catalogSection').scrollIntoView({behavior: 'smooth'});">
+          <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=800&q=80" alt="Colección Descanso Zen">
+          <div class="collection-card__overlay">
+            <span class="collection-card__tag">Serenidad & Reposo</span>
+            <h3 class="collection-card__title">Dormitorios de Calma</h3>
+            <span class="collection-card__link">
+              Explorar piezas
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Banner de Inspiración Shoppable -->
+  <section class="inspiration-banner" id="inspirationSection" style="padding: 5rem 0; background-color: var(--color-marfil);">
+    <div class="container" style="background: linear-gradient(135deg, #ECE5DC 0%, #D8C8B5 100%); border-radius: var(--radius-lg); padding: 3.5rem 3rem; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; align-items: center;">
+      <div>
+        <span class="section-tag" style="color: var(--color-roble);">Inspiración Guiada</span>
+        <h2 style="margin-bottom: 1rem;">¿Necesitas ayuda para diseñar tus espacios?</h2>
+        <p style="color: var(--color-carbon); margin-bottom: 2rem; font-size: 1.05rem; line-height: 1.7;">
+          Nuestro equipo de arquitectos e interioristas te ayuda a elegir dimensiones, maderas y textiles de forma completamente personalizada y gratuita.
+        </p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <button class="btn btn--primary" onclick="showToast('¡Asesor de diseño asignado! Te contactaremos al correo registrado.', 'success')">
+            Agendar Asesoría Virtual
+          </button>
+          <a href="#catalogSection" class="btn btn--secondary">
+            Ver Piezas Clave
+          </a>
+        </div>
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=900&q=80" 
+             alt="Composición de aparador y arte contemporáneo" 
+             style="border-radius: var(--radius-md); box-shadow: var(--shadow-md); width: 100%; aspect-ratio: 4/3; object-fit: cover;">
+      </div>
+    </div>
+  </section>
+
+  <!-- Beneficios de la Marca (Puntales de Valor) -->
+  <section class="benefits-section" id="benefitsSection">
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 3.5rem;">
+        <span class="section-tag" style="justify-content: center;">Compromiso & Excelencia</span>
+        <h2 class="section-title">Por qué elegir ÁBICA</h2>
+        <p class="section-subtitle" style="margin: 0 auto;">
+          Un estándar riguroso de artesanía, diseño honesto y servicio impecable en cada entrega.
+        </p>
+      </div>
+
+      <div class="benefits-grid">
+        <!-- Beneficio 1 -->
+        <article class="benefit-card">
+          <div class="benefit-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          </div>
+          <h3 class="benefit-title">Madera Sostenible FSC</h3>
+          <p class="benefit-description">
+            Utilizamos roble, nogal y fresno provenientes de bosques gestionados éticamente, tratados con aceites vegetales no tóxicos.
+          </p>
+        </article>
+
+        <!-- Beneficio 2 -->
+        <article class="benefit-card">
+          <div class="benefit-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="1" y="3" width="15" height="13"/>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+              <circle cx="5.5" cy="18.5" r="2.5"/>
+              <circle cx="18.5" cy="18.5" r="2.5"/>
+            </svg>
+          </div>
+          <h3 class="benefit-title">Envío Asegurado Nacional</h3>
+          <p class="benefit-description">
+            Entregas con embalaje de triple corcho y transporte especializado en muebles finos para garantizar integridad absoluta.
+          </p>
+        </article>
+
+        <!-- Beneficio 3 -->
+        <article class="benefit-card">
+          <div class="benefit-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3 class="benefit-title">5 Años de Garantía</h3>
+          <p class="benefit-description">
+            Confianza total en la durabilidad estructural de nuestras uniones, ensambles tradicionales y estabilidad dimensional.
+          </p>
+        </article>
+
+        <!-- Beneficio 4 -->
+        <article class="benefit-card">
+          <div class="benefit-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            </svg>
+          </div>
+          <h3 class="benefit-title">Ensamblado de Fábrica</h3>
+          <p class="benefit-description">
+            La mayoría de nuestras piezas se entregan completamente estructuradas o requieren un montaje mínimo y sin complicaciones.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Preguntas Frecuentes (FAQ Accordion) -->
+  <section class="faq-section" id="faqSection">
+    <div class="container faq-container">
+      <div style="text-align: center; margin-bottom: 3rem;">
+        <span class="section-tag" style="justify-content: center;">Claridad & Confianza</span>
+        <h2 class="section-title">Preguntas Frecuentes</h2>
+        <p class="section-subtitle" style="margin: 0 auto;">
+          Todo lo que necesitas saber antes y después de comprar tus piezas de mobiliario.
+        </p>
+      </div>
+
+      <div class="faq-list">
+        <!-- FAQ 1 -->
+        <div class="faq-item active">
+          <button class="faq-question">
+            <span>¿Cuáles son los tiempos de entrega estimados en Colombia?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Para Bogotá y ciudades principales (Medellín, Cali, Barranquilla, Bucaramanga), las entregas de piezas en stock tardan de 3 a 5 días hábiles. Para municipios intermedios o piezas personalizadas, el plazo habitual es de 6 a 10 días hábiles con seguimiento satelital constante.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>¿Cómo se realiza el mantenimiento de la madera maciza de roble?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Nuestras maderas están protegidas con aceites botánicos hidro-repelentes. Para el mantenimiento diario basta un paño de microfibra ligeramente húmedo. Recomendamos aplicar cera de abeja natural o aceite nutritivo una vez al año para mantener viva la veta profunda.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>¿Tienen servicio de entrega tipo "Guante Blanco"?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              ¡Sí! En las principales ciudades de Colombia ofrecemos el servicio de despacho con subida por ascensor o escaleras, desembalaje cuidadoso en la habitación de tu preferencia y retiro de todos los materiales ecológicos de embalaje.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>¿Cómo funciona la política de cambios y devoluciones?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Ofrecemos 30 días calendario de prueba en tu hogar. Si las dimensiones o el estilo no armonizan con tu espacio, coordinamos la recolección sin costo alguno y te reembolsamos el 100% de tu dinero.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Demostrativo -->
+  <section class="newsletter-section" id="newsletterSection">
+    <div class="container">
+      <div class="newsletter-box">
+        <span class="section-tag" style="color: var(--color-arena); justify-content: center;">Comunidad ÁBICA</span>
+        <h2 class="newsletter-title">Diseño de interiores en tu buzón</h2>
+        <p class="newsletter-desc">
+          Suscríbete para recibir lanzamientos de nuevas colecciones, guías de decoración y un 10% de descuento en tu primer pedido demostrativo.
+        </p>
+        <form class="newsletter-form" id="newsletterForm">
+          <input type="email" 
+                 id="newsletterEmail" 
+                 class="newsletter-input" 
+                 placeholder="Ingresa tu correo electrónico..." 
+                 required 
+                 aria-label="Correo para boletín">
+          <button type="submit" class="btn btn--accent">
+            Suscribirme
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pie de Página (Footer) -->
+  <footer class="site-footer" id="footerSection">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <!-- Columna 1: Marca & Misión -->
+        <div class="footer-brand">
+          <a href="#" class="brand-logo" style="margin-bottom: 1rem;">
+            <span class="brand-symbol" style="background-color: var(--color-roble);">Á</span>
+            <div class="brand-text">
+              <span class="brand-name" style="color: var(--color-white);">ÁBICA</span>
+              <span class="brand-slogan" style="color: var(--color-arena);">Muebles Contemporáneos</span>
+            </div>
+          </a>
+          <p>
+            Creando espacios de serenidad y calidez cotidiana a través del diseño nórdico contemporáneo y la carpintería artesanal de roble macizo.
+          </p>
+          <div class="footer-social-row">
+            <a href="#" class="social-icon-btn" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" class="social-icon-btn" aria-label="Pinterest">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="4" x2="12" y2="20"/><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/></svg>
+            </a>
+            <a href="#" class="social-icon-btn" aria-label="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Columna 2: Explorar -->
+        <div>
+          <h4 class="footer-heading">Categorías</h4>
+          <ul class="footer-links">
+            <li><a href="#catalogSection" onclick="setCategoryFilter('Sofás y sillones');">Sofás y sillones</a></li>
+            <li><a href="#catalogSection" onclick="setCategoryFilter('Mesas de comedor');">Mesas de comedor</a></li>
+            <li><a href="#catalogSection" onclick="setCategoryFilter('Sillas');">Sillas ergonómicas</a></li>
+            <li><a href="#catalogSection" onclick="setCategoryFilter('Camas y dormitorios');">Dormitorios zen</a></li>
+            <li><a href="#catalogSection" onclick="setCategoryFilter('Estanterías y almacenamiento');">Estanterías & Módulos</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 3: Servicio al Cliente -->
+        <div>
+          <h4 class="footer-heading">Atención al Cliente</h4>
+          <ul class="footer-links">
+            <li><a href="#faqSection">Preguntas frecuentes</a></li>
+            <li><a href="#faqSection">Guía de cuidados de la madera</a></li>
+            <li><a href="#benefitsSection">Garantía estructural</a></li>
+            <li><a href="#faqSection">Tiempos de entrega</a></li>
+            <li><a href="javascript:void(0)" onclick="showToast('Línea de atención WhatsApp: +57 300 123 4567', 'info')">Asesoría WhatsApp</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 4: Contacto & Showroom -->
+        <div>
+          <h4 class="footer-heading">Estudio & Showroom</h4>
+          <p style="color: var(--color-arena); margin-bottom: 0.5rem;">
+            Carrera 11 # 85-32, Zona Rosa<br>
+            Bogotá D.C., Colombia
+          </p>
+          <p style="color: var(--color-arena); margin-bottom: 0.5rem;">
+            Lunes a Sábado: 10:00 am – 7:00 pm<br>
+            Domingos y festivos con cita previa
+          </p>
+          <p style="color: var(--color-roble); font-weight: 600;">
+            contacto@abica-muebles.com
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Barra Inferior de Copyright -->
+      <div class="footer-bottom">
+        <span>© 2026 ÁBICA Muebles Contemporáneos S.A.S. — Todos los derechos reservados.</span>
+        <span>Front-End UI/UX Demostrativo construido en HTML5, CSS3 y JavaScript Vanilla.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       PANELES LATERALES (DRAWERS)
+       ========================================================================== -->
+  <div class="backdrop" id="appBackdrop" onclick="closeAllDrawers()"></div>
+
+  <!-- Drawer: Carrito de Compras -->
+  <aside class="drawer" id="cartDrawer" aria-label="Panel del carrito de compras">
+    <div class="drawer-header">
+      <div class="drawer-title-wrap">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        <h3 class="drawer-title">Bolsa de Compras</h3>
+      </div>
+      <button class="drawer-close-btn" onclick="closeDrawer('cartDrawer')" aria-label="Cerrar carrito">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Barra de Meta de Envío Gratis -->
+    <div class="cart-shipping-notice">
+      <p class="shipping-msg" id="cartShippingMessage">Calculando envío...</p>
+      <div class="progress-track">
+        <div class="progress-fill" id="cartShippingProgress" style="width: 0%;"></div>
+      </div>
+    </div>
+
+    <!-- Items del Carrito -->
+    <div class="drawer-body" id="cartDrawerItems">
+      <!-- Generado dinámicamente desde cart.js -->
+    </div>
+
+    <!-- Resumen y Checkout Button -->
+    <div class="drawer-footer" id="cartDrawerFooter">
+      <!-- Generado dinámicamente desde cart.js -->
+    </div>
+  </aside>
+
+  <!-- Drawer: Lista de Favoritos (Wishlist) -->
+  <aside class="drawer" id="wishlistDrawer" aria-label="Panel de lista de deseos">
+    <div class="drawer-header">
+      <div class="drawer-title-wrap">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="#A87950" stroke="#A87950" stroke-width="1.5">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+        <h3 class="drawer-title">Mis Favoritos</h3>
+      </div>
+      <button class="drawer-close-btn" onclick="closeDrawer('wishlistDrawer')" aria-label="Cerrar favoritos">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer-body" id="wishlistDrawerItems">
+      <!-- Generado dinámicamente desde cart.js -->
+    </div>
+  </aside>
+
+  <!-- Drawer: Navegación Móvil -->
+  <aside class="drawer drawer--left" id="mobileNavDrawer" aria-label="Menú de navegación para dispositivos móviles">
+    <div class="drawer-header">
+      <div class="brand-logo">
+        <span class="brand-symbol">Á</span>
+        <span class="brand-name">ÁBICA</span>
+      </div>
+      <button class="drawer-close-btn" onclick="closeDrawer('mobileNavDrawer')" aria-label="Cerrar menú">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer-body">
+      <ul style="list-style: none; display: flex; flex-direction: column; gap: 1.25rem; font-size: 1.15rem; font-weight: 600;">
+        <li><a href="#catalogSection" onclick="closeAllDrawers()">Catálogo Completo</a></li>
+        <li><a href="#collectionsSection" onclick="closeAllDrawers()">Colecciones</a></li>
+        <li><a href="#inspirationSection" onclick="closeAllDrawers()">Inspiración Interior</a></li>
+        <li><a href="#benefitsSection" onclick="closeAllDrawers()">Nuestra Filosofía</a></li>
+        <li><a href="#faqSection" onclick="closeAllDrawers()">Preguntas Frecuentes</a></li>
+      </ul>
+
+      <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--color-arena-tint);">
+        <p style="font-size: 0.85rem; color: var(--color-carbon-muted); margin-bottom: 1rem;">
+          Atención al Cliente: (601) 745-9800<br>
+          Bogotá D.C., Colombia
+        </p>
+        <button class="btn btn--primary btn--full" onclick="closeAllDrawers(); openDrawer('cartDrawer');">
+          Ver Mi Carrito
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       MODALES (Detalle de Producto, Checkout Demostrativo, Confirmación de Compra)
+       ========================================================================== -->
+  <div class="modal-backdrop" id="modalBackdrop" onclick="closeModal('productDetailModal'); closeModal('checkoutModal'); closeModal('orderSuccessModal');"></div>
+
+  <!-- Modal: Detalle de Producto & Vista Rápida -->
+  <div class="modal" id="productDetailModal" role="dialog" aria-modal="true" aria-labelledby="modalProductTitle">
+    <button class="modal-close-btn" onclick="closeModal('productDetailModal')" aria-label="Cerrar ventana de detalle">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <div id="productModalContent">
+      <!-- Renderizado dinámicamente en app.js -->
+    </div>
+  </div>
+
+  <!-- Modal: Proceso de Compra Simulado (Checkout Demostrativo) -->
+  <div class="modal checkout-modal" id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="checkoutModalTitle">
+    <button class="modal-close-btn" onclick="closeModal('checkoutModal')" aria-label="Cerrar checkout">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+
+    <div class="checkout-grid">
+      <!-- Columna 1: Formulario de Entrega & Contacto -->
+      <div class="checkout-form-column">
+        <h3 id="checkoutModalTitle">Finalizar Compra Demostrativa</h3>
+        
+        <div class="checkout-notice">
+          <strong>Aviso informativo:</strong> Este es un entorno demostrativo para fines de evaluación Front-End UI/UX. No se realizarán cargos monetarios reales ni se solicitan contraseñas financieras.
+        </div>
+
+        <form id="checkoutForm" novalidate>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="customerFirstName" class="form-label">Nombre *</label>
+              <input type="text" id="customerFirstName" class="form-input" placeholder="Ej. Camila" required>
+              <span class="form-error-msg" id="customerFirstNameError"></span>
+            </div>
+            <div class="form-group">
+              <label for="customerLastName" class="form-label">Apellidos *</label>
+              <input type="text" id="customerLastName" class="form-input" placeholder="Ej. Restrepo Gómez" required>
+              <span class="form-error-msg" id="customerLastNameError"></span>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="customerEmail" class="form-label">Correo Electrónico *</label>
+              <input type="email" id="customerEmail" class="form-input" placeholder="camila@ejemplo.com" required>
+              <span class="form-error-msg" id="customerEmailError"></span>
+            </div>
+            <div class="form-group">
+              <label for="customerPhone" class="form-label">Teléfono Móvil *</label>
+              <input type="tel" id="customerPhone" class="form-input" placeholder="Ej. 3101234567" required>
+              <span class="form-error-msg" id="customerPhoneError"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="customerAddress" class="form-label">Dirección de Entrega Completa *</label>
+            <input type="text" id="customerAddress" class="form-input" placeholder="Ej. Calle 93 # 14-20 Apto 402" required>
+            <span class="form-error-msg" id="customerAddressError"></span>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="customerCity" class="form-label">Ciudad / Municipio *</label>
+              <input type="text" id="customerCity" class="form-input" placeholder="Ej. Bogotá D.C." required>
+              <span class="form-error-msg" id="customerCityError"></span>
+            </div>
+            <div class="form-group">
+              <label for="customerDepartment" class="form-label">Departamento *</label>
+              <select id="customerDepartment" class="form-input" required>
+                <option value="">Selecciona un departamento</option>
+                <option value="Bogotá D.C." selected>Bogotá D.C.</option>
+                <option value="Antioquia">Antioquia</option>
+                <option value="Valle del Cauca">Valle del Cauca</option>
+                <option value="Cundinamarca">Cundinamarca</option>
+                <option value="Santander">Santander</option>
+                <option value="Atlántico">Atlántico</option>
+                <option value="Bolívar">Bolívar</option>
+                <option value="Risaralda">Risaralda</option>
+                <option value="Caldas">Caldas</option>
+              </select>
+              <span class="form-error-msg" id="customerDepartmentError"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Método de Pago Simulado</label>
+            <div class="payment-methods-grid">
+              <label class="payment-radio-label">
+                <input type="radio" name="paymentMethod" value="Transferencia Bancaria / PSE" checked>
+                <span>Transferencia Bancaria / PSE (Simulación)</span>
+              </label>
+              <label class="payment-radio-label">
+                <input type="radio" name="paymentMethod" value="Tarjeta de Crédito Demo">
+                <span>Tarjeta de Crédito Demo (Sin cobro)</span>
+              </label>
+              <label class="payment-radio-label">
+                <input type="radio" name="paymentMethod" value="Pago Contra Entrega en Domicilio">
+                <span>Pago Contra Entrega en Domicilio</span>
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" id="submitCheckoutBtn" class="btn btn--primary btn--full" style="padding: 1rem;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Confirmar Pedido Demostrativo</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Columna 2: Resumen de Artículos y Liquidación -->
+      <div class="checkout-summary-column">
+        <h3>Resumen del Pedido</h3>
+        <div class="checkout-items-scroll" id="checkoutOrderItems">
+          <!-- Renderizado en app.js -->
+        </div>
+
+        <div style="border-top: 1px solid var(--color-arena-tint); padding-top: 1rem; margin-top: 1rem;">
+          <div class="cart-summary-line">
+            <span>Subtotal</span>
+            <span id="checkoutSubtotal">$ 0 COP</span>
+          </div>
+          <div class="cart-summary-line">
+            <span>Envío asegurado</span>
+            <span id="checkoutShippingCost">GRATIS</span>
+          </div>
+          <div class="cart-summary-line cart-summary-line--total">
+            <span>Total a Pagar</span>
+            <span id="checkoutTotal" style="color: var(--color-roble); font-size: 1.3rem;">$ 0 COP</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.5rem; font-size: 0.76rem; color: var(--color-carbon-muted); line-height: 1.5;">
+          ✓ Confirmación instantánea por correo electrónico.<br>
+          ✓ Despacho con cita previa coordinada telefónicamente.<br>
+          ✓ Póliza de protección y seguro todo riesgo en tránsito.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Confirmación Exitosa de la Compra -->
+  <div class="modal order-success-modal" id="orderSuccessModal" role="dialog" aria-modal="true" aria-labelledby="orderSuccessTitle">
+    <button class="modal-close-btn" onclick="closeModal('orderSuccessModal')" aria-label="Cerrar confirmación">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <div id="orderSuccessDetails">
+      <!-- Generado dinámicamente en app.js -->
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- Carga ordenada de scripts JavaScript Vanilla sin dependencias externas -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
