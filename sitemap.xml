@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Página Principal / Home -->
+  <url>
+    <loc>https://abica.com.co/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    
+    <!-- Imágenes Clave para Búsqueda Visual y Motores Multimodales -->
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&amp;fit=crop&amp;w=1200&amp;q=80</image:loc>
+      <image:title>Sofá Modular Malmö en Roble Macizo y Lino Europeo</image:title>
+      <image:caption>Diseño contemporáneo escandinavo para salas modernas en Colombia.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&amp;fit=crop&amp;w=1200&amp;q=80</image:loc>
+      <image:title>Sillón Lounge Vester en Bouclé y Roble Natural</image:title>
+      <image:caption>Sillón de descanso ergonómico inspirado en el diseño nórdico.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&amp;fit=crop&amp;w=1200&amp;q=80</image:loc>
+      <image:title>Mesa de Comedor Oikos en Madera de Roble Macizo</image:title>
+      <image:caption>Mesa espaciosa para 8 comensales con ensambles artesanales de carpintería.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&amp;fit=crop&amp;w=1200&amp;q=80</image:loc>
+      <image:title>Silla de Comedor Koto en Roble y Cordel Danés</image:title>
+      <image:caption>Silla artesanal de alta durabilidad con curvatura anatómica.</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Sección Catálogo Interactivo -->
+  <url>
+    <loc>https://abica.com.co/#catalogSection</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Sección Colecciones -->
+  <url>
+    <loc>https://abica.com.co/#collectionsSection</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Sección Inspiración & Asesoría de Diseño -->
+  <url>
+    <loc>https://abica.com.co/#inspirationSection</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Sección Preguntas Frecuentes (AEO Ground Truth) -->
+  <url>
+    <loc>https://abica.com.co/#faqSection</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Sección Beneficios & Garantía -->
+  <url>
+    <loc>https://abica.com.co/#benefitsSection</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+</urlset>

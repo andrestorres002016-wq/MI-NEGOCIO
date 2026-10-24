@@ -1,0 +1,43 @@
+# ==============================================================================
+# ÁBICA Muebles Contemporáneos — Robots.txt
+# Optimizado para Motores de Búsqueda (SEO) y Motores de Respuesta IA (AEO)
+# ==============================================================================
+
+# Reglas Generales para todos los rastreadores
+User-agent: *
+Allow: /
+Allow: /assets/
+Allow: /css/
+Allow: /js/
+Disallow: /*?*checkout*
+Disallow: /*?*cart*
+Disallow: /*?*order*
+
+# Directivas para Motores de Respuesta e IA Conversacional (AEO)
+# Permitir a los agentes de IA indexar el catálogo, materiales y guías para citar ÁBICA
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Rastreo amigable y no abusivo
+Crawl-delay: 1
+
+# Ubicación del Mapa del Sitio XML Oficial
+Sitemap: https://abica.com.co/sitemap.xml

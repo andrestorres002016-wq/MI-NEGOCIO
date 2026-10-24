@@ -1,0 +1,67 @@
+# ==============================================================================
+# ÁBICA Muebles Contemporáneos — Servidor Apache / LiteSpeed .htaccess
+# Configuración Integral de Seguridad en Servidor
+# ==============================================================================
+
+# 1. FORZAR HTTPS Y REDIRECCIÓN SEGURA
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# 2. CABECERAS HTTP DE SEGURIDAD (Security Headers)
+<IfModule mod_headers.c>
+  # HTTP Strict Transport Security (HSTS) — 1 año con subdominios y precarga
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+  # Prevención de ataques MIME-sniffing
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Prevención de Clickjacking (Anti-Framing)
+  Header always set X-Frame-Options "DENY"
+
+  # Filtro XSS para navegadores legados
+  Header always set X-XSS-Protection "1; mode=block"
+
+  # Política de Referrers estricta para privacidad
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Permissions Policy: Bloqueo de APIs de hardware sensibles no requeridas por la tienda
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), display-capture=()"
+
+  # Content Security Policy (CSP) en Cabecera
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https://images.unsplash.com https://*.unsplash.com blob:; connect-src 'self' https://wa.me; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"
+</IfModule>
+
+# 3. BLOQUEO DE EXPLORACIÓN DE DIRECTORIOS (Directory Listing)
+Options -Indexes
+
+# 4. OCULTAR INFORMACIÓN DEL SERVIDOR
+ServerSignature Off
+
+# 5. BLOQUEO DE ACCESO A ARCHIVOS SENSIBLES Y OCULTOS
+# Proteger archivos de control de versiones (.git), variables de entorno (.env) y configuraciones
+<FilesMatch "^\.|\.(bak|config|sql|fla|psd|ini|log|sh|inc|swp|dist|env|git)">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order deny,allow
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# Proteger el propio .htaccess
+<Files .htaccess>
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order deny,allow
+    Deny from all
+  </IfModule>
+</Files>
+
+# 6. TIPO MIME UTF-8 POR DEFECTO (Previene ataques de confusión de codificación)
+AddDefaultCharset UTF-8

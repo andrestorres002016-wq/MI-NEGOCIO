@@ -15,18 +15,21 @@ const STANDARD_SHIPPING_COST = 85000;    // COP $85.000 tarifa fija si no alcanz
 let cart = [];
 let wishlist = [];
 
-// Inicialización de persistencia local
+// Inicialización de persistencia local segura con verificación de integridad de precios
 function initCartAndWishlist() {
   try {
     const savedCart = localStorage.getItem(STORAGE_KEYS.CART);
     if (savedCart) {
       const parsed = JSON.parse(savedCart);
       if (Array.isArray(parsed)) {
-        cart = parsed.filter(item => item && item.id && item.quantity > 0);
+        // Blindaje Anti-Tampering: Revalidar cada artículo con el catálogo oficial
+        cart = parsed
+          .map(item => (window.Security ? window.Security.sanitizeAndVerifyCartItem(item, products) : item))
+          .filter(item => item && item.id && item.quantity > 0);
       }
     }
   } catch (e) {
-    console.warn("Error al cargar carrito de localStorage:", e);
+    console.warn("[Security] Error al cargar carrito de localStorage, reiniciando:", e);
     cart = [];
   }
 
@@ -35,11 +38,12 @@ function initCartAndWishlist() {
     if (savedWishlist) {
       const parsed = JSON.parse(savedWishlist);
       if (Array.isArray(parsed)) {
-        wishlist = parsed.filter(id => typeof id === "number");
+        // Solo aceptar IDs numéricos que correspondan a productos reales
+        wishlist = parsed.filter(id => typeof id === "number" && products.some(p => p.id === id));
       }
     }
   } catch (e) {
-    console.warn("Error al cargar favoritos de localStorage:", e);
+    console.warn("[Security] Error al cargar favoritos de localStorage, reiniciando:", e);
     wishlist = [];
   }
 
@@ -67,24 +71,29 @@ function saveWishlistToStorage() {
 // ----------------- OPERACIONES DEL CARRITO -----------------
 
 function addToCart(productId, quantity = 1, selectedColor = null) {
-  const product = products.find(p => p.id === productId);
+  const cleanId = parseInt(productId, 10);
+  const product = products.find(p => p.id === cleanId);
   if (!product) return false;
 
-  const colorToSave = selectedColor || product.color;
-  const existingItemIndex = cart.findIndex(item => item.id === productId && item.color === colorToSave);
+  // Validación estricta de cantidad: entero entre 1 y 99
+  const cleanQty = Math.min(99, Math.max(1, parseInt(quantity, 10) || 1));
+  const rawColor = selectedColor || product.color;
+  const colorToSave = window.Security ? window.Security.sanitizeHTML(rawColor) : rawColor;
+
+  const existingItemIndex = cart.findIndex(item => item.id === cleanId && item.color === colorToSave);
 
   if (existingItemIndex > -1) {
-    cart[existingItemIndex].quantity += quantity;
+    cart[existingItemIndex].quantity = Math.min(99, cart[existingItemIndex].quantity + cleanQty);
   } else {
     cart.push({
       id: product.id,
       name: product.name,
-      price: product.price,
+      price: product.price, // Precio canónico inmutable
       image: product.image,
       category: product.category,
       material: product.material,
       color: colorToSave,
-      quantity: quantity
+      quantity: cleanQty
     });
   }
 
@@ -95,8 +104,9 @@ function addToCart(productId, quantity = 1, selectedColor = null) {
 }
 
 function removeFromCart(productId, color) {
+  const cleanId = parseInt(productId, 10);
   const initialLength = cart.length;
-  cart = cart.filter(item => !(item.id === productId && (!color || item.color === color)));
+  cart = cart.filter(item => !(item.id === cleanId && (!color || item.color === color)));
   if (cart.length < initialLength) {
     saveCartToStorage();
     renderCartDrawer();
@@ -105,28 +115,31 @@ function removeFromCart(productId, color) {
 }
 
 function updateCartQuantity(productId, color, delta) {
-  const item = cart.find(item => item.id === productId && (!color || item.color === color));
+  const cleanId = parseInt(productId, 10);
+  const item = cart.find(item => item.id === cleanId && (!color || item.color === color));
   if (!item) return;
 
-  const newQty = item.quantity + delta;
+  const cleanDelta = parseInt(delta, 10) || 0;
+  const newQty = item.quantity + cleanDelta;
   if (newQty <= 0) {
-    removeFromCart(productId, color);
+    removeFromCart(cleanId, color);
   } else {
-    item.quantity = newQty;
+    item.quantity = Math.min(99, newQty);
     saveCartToStorage();
     renderCartDrawer();
   }
 }
 
 function setCartQuantity(productId, color, exactQty) {
-  const item = cart.find(item => item.id === productId && (!color || item.color === color));
+  const cleanId = parseInt(productId, 10);
+  const item = cart.find(item => item.id === cleanId && (!color || item.color === color));
   if (!item) return;
 
   const qty = parseInt(exactQty, 10);
   if (isNaN(qty) || qty <= 0) {
-    removeFromCart(productId, color);
+    removeFromCart(cleanId, color);
   } else {
-    item.quantity = Math.min(qty, 99);
+    item.quantity = Math.min(Math.max(1, qty), 99);
     saveCartToStorage();
     renderCartDrawer();
   }
