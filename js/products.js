@@ -13,7 +13,7 @@ const products = [
     category: "Sofás y sillones",
     material: "Lino natural y roble",
     color: "Beige Marfil",
-    colorHex: "#F2EFE9",
+    colorHex: "#e7e2d6ff",
     dimensions: "240 x 100 x 82 cm",
     image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80",
     gallery: [
