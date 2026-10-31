@@ -1,0 +1,32 @@
+{
+  "name": "abica-backend",
+  "version": "1.0.0",
+  "description": "Backend API REST y Panel Administrativo para ÁBICA Muebles & Espacios Contemporáneos",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "seed": "node src/seed/seedData.js"
+  },
+  "keywords": [
+    "abica",
+    "ecommerce",
+    "furniture",
+    "express",
+    "postgresql",
+    "admin-console"
+  ],
+  "author": "ÁBICA",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "pg": "^8.11.5"
+  }
+}

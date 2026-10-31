@@ -4,7 +4,7 @@
  * Precios expresados en Pesos Colombianos (COP)
  */
 
-const products = [
+let products = [
   {
     id: 1,
     name: "Sofá Modular Malmö",
@@ -526,4 +526,26 @@ function formatCurrency(amount) {
     currency: "COP",
     maximumFractionDigits: 0
   }).format(amount);
+}
+
+// Sincronización automática con la API de PostgreSQL del backend
+if (typeof window !== "undefined") {
+  window.products = products;
+
+  // Consultar catálogo en tiempo real desde el backend
+  fetch("/api/products")
+    .then(r => r.ok ? r.json() : null)
+    .then(data => {
+      if (data && data.success && Array.isArray(data.products) && data.products.length > 0) {
+        products.length = 0;
+        products.push(...data.products);
+        window.products = products;
+        if (typeof applyFilters === "function") {
+          applyFilters();
+        }
+      }
+    })
+    .catch(() => {
+      // Si el servidor aún no responde o corre estático, opera con catálogo local
+    });
 }

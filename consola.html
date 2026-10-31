@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ÁBICA — Consola Administrativa</title>
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  
+  <!-- Tipografía Google Fonts: Outfit & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Estilos de la Consola -->
+  <link rel="stylesheet" href="css/consola.css">
+</head>
+<body class="admin-body">
+
+  <div class="admin-layout">
+    
+    <!-- ==================== SIDEBAR IZQUIERDA ==================== -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <a href="/consola" class="sidebar-logo">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"/>
+            <rect x="14" y="3" width="7" height="7"/>
+            <rect x="14" y="14" width="7" height="7"/>
+            <rect x="3" y="14" width="7" height="7"/>
+          </svg>
+          <div class="sidebar-logo-text">
+            <h2>ÁBICA</h2>
+            <span>Consola Admin</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Menú de opciones a la izquierda -->
+      <nav class="sidebar-nav">
+        <div class="nav-section-title">Panel Principal</div>
+        
+        <button class="nav-item active" data-section="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+          <span>Dashboard</span>
+        </button>
+
+        <button class="nav-item" data-section="products">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          <span>Catálogo de Muebles</span>
+        </button>
+
+        <button class="nav-item" data-section="orders">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span>Gestión de Pedidos</span>
+          <span class="badge-pill" id="badgeOrdersCount">1</span>
+        </button>
+
+        <div class="nav-section-title">Comunidad & Clientes</div>
+
+        <button class="nav-item" data-section="users">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Clientes & Cuentas</span>
+        </button>
+
+        <button class="nav-item" data-section="subscribers">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span>Suscriptores</span>
+        </button>
+
+        <div class="nav-section-title">Sistema</div>
+
+        <button class="nav-item" data-section="settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span>Configuración & BD</span>
+        </button>
+
+        <a href="/" target="_blank" class="nav-item" style="margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 14px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span>Ver Tienda Pública ↗</span>
+        </a>
+      </nav>
+
+      <!-- Pie de Sidebar con Perfil del Administrador -->
+      <div class="sidebar-footer">
+        <div class="admin-user-profile">
+          <div class="admin-avatar" id="sidebarAdminAvatar">AD</div>
+          <div class="admin-user-info">
+            <h4 id="sidebarAdminName">Administrador</h4>
+            <span>Rol: ADMIN</span>
+          </div>
+        </div>
+        <button class="btn-logout-sidebar" onclick="logoutAdmin()" title="Cerrar Sesión">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ==================== CONTENIDO PRINCIPAL ==================== -->
+    <main class="admin-main">
+      
+      <!-- Barra Superior -->
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button class="btn-mobile-sidebar" id="mobileSidebarToggle" aria-label="Abrir menú">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+          <div class="topbar-title">
+            <h1 id="currentSectionTitle">Panel de Control</h1>
+            <p id="currentSectionSubtitle">Métricas generales, ventas y rendimiento en tiempo real</p>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <div class="db-status-pill">
+            <span class="dot"></span>
+            <span>PostgreSQL Docker: En Línea</span>
+          </div>
+          <a href="/" target="_blank" class="btn-admin btn-admin--outline btn-admin--sm">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span>Tienda Pública</span>
+          </a>
+        </div>
+      </header>
+
+      <!-- Área de Contenido Dinámico -->
+      <div class="admin-content-area">
+
+        <!-- ---------------- SECCIÓN 1: DASHBOARD ---------------- -->
+        <section class="admin-section active" id="section-dashboard">
+          
+          <!-- Grid de Métricas Clave (KPIs) -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon stat-icon--gold">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+              <div class="stat-details">
+                <span>Ventas Registradas</span>
+                <h3 id="statTotalSales">$ 0 COP</h3>
+                <p>Pedidos completados en base de datos</p>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon stat-icon--blue">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              </div>
+              <div class="stat-details">
+                <span>Pedidos Totales</span>
+                <h3 id="statTotalOrders">0</h3>
+                <p>Gestión de órdenes en PostgreSQL</p>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon stat-icon--green">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              </div>
+              <div class="stat-details">
+                <span>Catálogo Activo</span>
+                <h3 id="statActiveProducts">0 de 18</h3>
+                <p>Muebles disponibles para venta</p>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon stat-icon--orange">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </div>
+              <div class="stat-details">
+                <span>Pedidos Pendientes</span>
+                <h3 id="statPendingOrders">0</h3>
+                <p>Requieren confirmación o despacho</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dos Paneles: Pedidos Recientes y Distribución de Categorías -->
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px; align-items: start;">
+            
+            <div class="card-panel">
+              <div class="card-panel-header">
+                <div class="card-panel-title">
+                  <h3>Pedidos Recientes</h3>
+                  <p>Últimas compras generadas en la tienda</p>
+                </div>
+                <button class="btn-admin btn-admin--outline btn-admin--sm" onclick="switchSection('orders')">
+                  Ver Todas las Órdenes →
+                </button>
+              </div>
+
+              <div class="table-responsive">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Código</th>
+                      <th>Cliente</th>
+                      <th>Total COP</th>
+                      <th>Estado</th>
+                      <th>Acción</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dashboardRecentOrdersBody">
+                    <tr><td colspan="5" style="text-align: center; padding: 20px;">Cargando...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card-panel">
+              <div class="card-panel-header">
+                <div class="card-panel-title">
+                  <h3>Categorías en Catálogo</h3>
+                  <p>Muebles por colección</p>
+                </div>
+              </div>
+              <div id="dashboardCategoryBars">
+                <p style="color: var(--admin-text-muted);">Cargando categorías...</p>
+              </div>
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- ---------------- SECCIÓN 2: CATÁLOGO DE PRODUCTOS (CRUD) ---------------- -->
+        <section class="admin-section" id="section-products">
+          <div class="card-panel">
+            <div class="card-panel-header">
+              <div class="card-panel-title">
+                <h3>Colección de Muebles</h3>
+                <p id="totalProductsCountLabel">18 muebles en catálogo</p>
+              </div>
+
+              <div class="panel-controls">
+                <div class="search-input-box">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <input type="text" id="productSearchInput" placeholder="Buscar por nombre..." oninput="loadProductsTable()" />
+                </div>
+
+                <select class="admin-select" id="productCategoryFilter" onchange="loadProductsTable()">
+                  <option value="Todos">Todas las Categorías</option>
+                  <option value="Sofás y sillones">Sofás y sillones</option>
+                  <option value="Mesas de comedor">Mesas de comedor</option>
+                  <option value="Sillas">Sillas</option>
+                  <option value="Camas y dormitorios">Camas y dormitorios</option>
+                  <option value="Escritorios y muebles de oficina">Escritorios y oficina</option>
+                  <option value="Estanterías y almacenamiento">Estanterías</option>
+                  <option value="Mesas auxiliares">Mesas auxiliares</option>
+                  <option value="Decoración complementaria">Decoración</option>
+                </select>
+
+                <button class="btn-admin btn-admin--primary" onclick="openCreateProductModal()">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  <span>Nuevo Mueble</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Mueble</th>
+                    <th>Categoría</th>
+                    <th>Precio COP</th>
+                    <th>Stock</th>
+                    <th>Badge</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="productsTableBody">
+                  <tr><td colspan="6" style="text-align: center; padding: 24px;">Cargando catálogo...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ---------------- SECCIÓN 3: GESTIÓN DE PEDIDOS ---------------- -->
+        <section class="admin-section" id="section-orders">
+          <div class="card-panel">
+            <div class="card-panel-header">
+              <div class="card-panel-title">
+                <h3>Órdenes de Compra</h3>
+                <p id="totalOrdersCountLabel">Pedidos registrados en base de datos</p>
+              </div>
+
+              <div class="panel-controls">
+                <div class="search-input-box">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <input type="text" id="orderSearchInput" placeholder="Buscar orden o cliente..." oninput="loadOrdersTable()" />
+                </div>
+
+                <select class="admin-select" id="orderStatusFilter" onchange="loadOrdersTable()">
+                  <option value="TODOS">Todos los Estados</option>
+                  <option value="PENDIENTE">Pendiente</option>
+                  <option value="CONFIRMADO">Confirmado</option>
+                  <option value="ENVIADO">Enviado</option>
+                  <option value="ENTREGADO">Entregado</option>
+                  <option value="CANCELADO">Cancelado</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Código</th>
+                    <th>Cliente</th>
+                    <th>Fecha</th>
+                    <th>Total COP</th>
+                    <th>Cambiar Estado</th>
+                    <th>Estado Actual</th>
+                    <th>Detalle</th>
+                  </tr>
+                </thead>
+                <tbody id="ordersTableBody">
+                  <tr><td colspan="7" style="text-align: center; padding: 24px;">Cargando pedidos...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ---------------- SECCIÓN 4: USUARIOS & CLIENTES ---------------- -->
+        <section class="admin-section" id="section-users">
+          <div class="card-panel">
+            <div class="card-panel-header">
+              <div class="card-panel-title">
+                <h3>Clientes y Administradores</h3>
+                <p>Directorio de usuarios registrados en PostgreSQL</p>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Nombre Completo</th>
+                    <th>Correo Electrónico</th>
+                    <th>Teléfono</th>
+                    <th>Rol de Acceso</th>
+                    <th>Fecha de Registro</th>
+                  </tr>
+                </thead>
+                <tbody id="usersTableBody">
+                  <tr><td colspan="5" style="text-align: center; padding: 24px;">Cargando directorio...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ---------------- SECCIÓN 5: SUSCRIPTORES NEWSLETTER ---------------- -->
+        <section class="admin-section" id="section-subscribers">
+          <div class="card-panel">
+            <div class="card-panel-header">
+              <div class="card-panel-title">
+                <h3>Comunidad de Suscriptores</h3>
+                <p>Correos electrónicos captados desde el formulario de la tienda</p>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Correo Electrónico</th>
+                    <th>Estado</th>
+                    <th>Fecha de Suscripción</th>
+                  </tr>
+                </thead>
+                <tbody id="subscribersTableBody">
+                  <tr><td colspan="3" style="text-align: center; padding: 24px;">Cargando suscriptores...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ---------------- SECCIÓN 6: CONFIGURACIÓN & BD ---------------- -->
+        <section class="admin-section" id="section-settings">
+          <div class="card-panel">
+            <div class="card-panel-header">
+              <div class="card-panel-title">
+                <h3>Arquitectura y Conexión</h3>
+                <p>Parámetros técnicos de ejecución y base de datos dockerizada</p>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+              <div style="background: #FAF8F5; padding: 20px; border-radius: var(--admin-radius-sm); border: 1px solid var(--admin-card-border);">
+                <h4 style="margin-bottom: 12px; font-family: var(--font-heading);">🐘 Base de Datos PostgreSQL</h4>
+                <ul style="list-style: none; font-size: 0.88rem; line-height: 2;">
+                  <li><strong>Entorno:</strong> Docker Desktop (Contenedor <code>abica_postgres</code>)</li>
+                  <li><strong>Motor:</strong> PostgreSQL 16 Alpine</li>
+                  <li><strong>Host:</strong> localhost</li>
+                  <li><strong>Puerto:</strong> 5432</li>
+                  <li><strong>Base de Datos:</strong> abica_db</li>
+                  <li><strong>Usuario:</strong> abica_admin</li>
+                  <li><strong>Pool:</strong> pg (node-postgres) Activo con Healthcheck</li>
+                </ul>
+              </div>
+
+              <div style="background: #FAF8F5; padding: 20px; border-radius: var(--admin-radius-sm); border: 1px solid var(--admin-card-border);">
+                <h4 style="margin-bottom: 12px; font-family: var(--font-heading);">👤 Perfil de Administrador Activo</h4>
+                <ul style="list-style: none; font-size: 0.88rem; line-height: 2;">
+                  <li><strong>Nombre:</strong> <span id="settingsAdminName">Administrador ÁBICA</span></li>
+                  <li><strong>Correo:</strong> <span id="settingsAdminEmail">admin@abica.com</span></li>
+                  <li><strong>Privilegio:</strong> <span class="stock-pill stock-pill--in">ADMIN</span></li>
+                  <li><strong>Token:</strong> JWT con expiración de 7 días</li>
+                  <li><strong>Seguridad:</strong> Passwords con hash bcrypt (10 rounds)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ==================== MODAL: CREAR / EDITAR MUEBLE ==================== -->
+  <div class="admin-modal-backdrop" id="productModal">
+    <div class="admin-modal">
+      <div class="admin-modal-header">
+        <h3 id="productModalTitle">Nuevo Mueble para el Catálogo</h3>
+        <button class="btn-icon" onclick="closeAdminModal('productModal')" aria-label="Cerrar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <form id="productForm">
+        <div class="admin-modal-body">
+          <input type="hidden" id="prodId" />
+
+          <div class="form-group">
+            <label for="prodName">Nombre del Mueble *</label>
+            <input type="text" id="prodName" class="form-control" required placeholder="Ej. Sofá Modular Malmö" />
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="prodPrice">Precio COP *</label>
+              <input type="number" id="prodPrice" class="form-control" required min="1000" step="1000" placeholder="Ej. 3290000" />
+            </div>
+            <div class="form-group">
+              <label for="prodOriginalPrice">Precio Anterior COP (Opcional)</label>
+              <input type="number" id="prodOriginalPrice" class="form-control" min="0" step="1000" placeholder="Ej. 3690000" />
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="prodCategory">Categoría *</label>
+              <select id="prodCategory" class="form-control" required>
+                <option value="Sofás y sillones">Sofás y sillones</option>
+                <option value="Mesas de comedor">Mesas de comedor</option>
+                <option value="Sillas">Sillas</option>
+                <option value="Camas y dormitorios">Camas y dormitorios</option>
+                <option value="Escritorios y muebles de oficina">Escritorios y muebles de oficina</option>
+                <option value="Estanterías y almacenamiento">Estanterías y almacenamiento</option>
+                <option value="Mesas auxiliares">Mesas auxiliares</option>
+                <option value="Decoración complementaria">Decoración complementaria</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="prodBadge">Badge Promocional</label>
+              <select id="prodBadge" class="form-control">
+                <option value="">Sin Badge</option>
+                <option value="Más Vendido">Más Vendido</option>
+                <option value="Nuevo">Nuevo</option>
+                <option value="15% OFF">15% OFF</option>
+                <option value="Edición Limitada">Edición Limitada</option>
+                <option value="Exclusivo">Exclusivo</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="prodMaterial">Materiales</label>
+              <input type="text" id="prodMaterial" class="form-control" placeholder="Ej. Madera de roble macizo" />
+            </div>
+            <div class="form-group">
+              <label for="prodDimensions">Dimensiones</label>
+              <input type="text" id="prodDimensions" class="form-control" placeholder="Ej. 240 x 100 x 82 cm" />
+            </div>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="prodColor">Nombre del Color</label>
+              <input type="text" id="prodColor" class="form-control" placeholder="Ej. Roble Natural" />
+            </div>
+            <div class="form-group">
+              <label for="prodColorHex">Color Hexadecimal</label>
+              <div style="display: flex; gap: 8px;">
+                <input type="color" id="prodColorPicker" style="height: 42px; width: 48px; border: 1px solid var(--admin-card-border); border-radius: 6px; cursor: pointer;" oninput="document.getElementById('prodColorHex').value = this.value" />
+                <input type="text" id="prodColorHex" class="form-control" value="#A87950" oninput="document.getElementById('prodColorPicker').value = this.value" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="prodImage">URL Imagen Principal (Alta Definición) *</label>
+            <input type="url" id="prodImage" class="form-control" required placeholder="https://images.unsplash.com/..." />
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="prodStockQty">Cantidad en Stock</label>
+              <input type="number" id="prodStockQty" class="form-control" value="15" min="0" />
+            </div>
+            <div class="form-group" style="display: flex; align-items: center; gap: 10px; margin-top: 26px;">
+              <input type="checkbox" id="prodInStock" checked style="width: 20px; height: 20px; cursor: pointer;" />
+              <label for="prodInStock" style="margin-bottom: 0; cursor: pointer;">Disponible para la venta</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="prodDescription">Descripción Editorial del Mueble</label>
+            <textarea id="prodDescription" class="form-control" rows="3" placeholder="Describe los detalles arquitectónicos, confort y calidez..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="prodFeatures">Características y Beneficios (un bullet por línea)</label>
+            <textarea id="prodFeatures" class="form-control" rows="3" placeholder="Estructura en roble macizo&#10;Tapicería antimanchas..."></textarea>
+          </div>
+        </div>
+
+        <div class="admin-modal-footer">
+          <button type="button" class="btn-admin btn-admin--outline" onclick="closeAdminModal('productModal')">Cancelar</button>
+          <button type="submit" class="btn-admin btn-admin--primary" id="saveProductBtn">Guardar Mueble</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL: DETALLE DEL PEDIDO ==================== -->
+  <div class="admin-modal-backdrop" id="orderModal">
+    <div class="admin-modal" style="max-width: 760px;">
+      <div class="admin-modal-header">
+        <h3 id="orderModalTitle">Detalle del Pedido</h3>
+        <button class="btn-icon" onclick="closeAdminModal('orderModal')" aria-label="Cerrar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="admin-modal-body" id="orderDetailModalBody">
+        <p>Cargando detalles...</p>
+      </div>
+      <div class="admin-modal-footer">
+        <button type="button" class="btn-admin btn-admin--primary" onclick="closeAdminModal('orderModal')">Entendido</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== LOGIN MODAL OVERLAY PARA ADMIN ==================== -->
+  <div class="admin-login-overlay" id="adminLoginOverlay" style="display: none;">
+    <div class="admin-login-card">
+      <div class="login-brand-header">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"/>
+          <rect x="14" y="3" width="7" height="7"/>
+          <rect x="14" y="14" width="7" height="7"/>
+          <rect x="3" y="14" width="7" height="7"/>
+        </svg>
+        <h2>ÁBICA Consola</h2>
+        <p>Acceso restringido para Administradores de la Tienda</p>
+      </div>
+
+      <div class="quick-demo-pill">
+        <span>🔐 Credenciales de prueba: <strong>admin@abica.com</strong></span>
+        <button type="button" onclick="quickFillAdmin()">Rellenar</button>
+      </div>
+
+      <div id="adminLoginError" style="display: none; background: #FDE8E8; color: #9B1C1C; padding: 10px 14px; border-radius: 6px; font-size: 0.84rem; margin-bottom: 16px;"></div>
+
+      <form id="adminLoginForm">
+        <div class="form-group">
+          <label for="adminLoginEmail">Correo de Administrador</label>
+          <input type="email" id="adminLoginEmail" class="form-control" required placeholder="admin@abica.com" value="admin@abica.com" />
+        </div>
+
+        <div class="form-group">
+          <label for="adminLoginPassword">Contraseña</label>
+          <input type="password" id="adminLoginPassword" class="form-control" required placeholder="••••••••" value="admin1234" />
+        </div>
+
+        <button type="submit" class="btn-admin btn-admin--primary" id="adminLoginSubmitBtn" style="width: 100%; justify-content: center; padding: 12px; margin-top: 10px;">
+          Ingresar a la Consola
+        </button>
+      </form>
+
+      <div style="text-align: center; margin-top: 20px;">
+        <a href="/" style="font-size: 0.82rem; color: var(--admin-text-muted); text-decoration: none;">← Volver a la Tienda Pública</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenedor de Alertas Toast -->
+  <div class="admin-toast-container" id="adminToastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="js/consola.js"></script>
+</body>
+</html>

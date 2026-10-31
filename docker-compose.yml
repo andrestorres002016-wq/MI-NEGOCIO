@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: abica_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER:-abica_admin}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-AbicaMuebles2026!}
+      POSTGRES_DB: ${DB_NAME:-abica_db}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - abica_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-abica_admin} -d ${DB_NAME:-abica_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  abica_postgres_data:
+    name: abica_postgres_data

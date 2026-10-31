@@ -99,6 +99,11 @@ function setupEventListeners() {
           showToast("Ingresa un formato de correo electrónico válido", "warning");
           return;
         }
+        fetch("/api/subscribers", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: emailVal })
+        }).catch(() => {});
         showToast("¡Gracias por suscribirte! Recibirás nuestro catálogo de temporada.", "success");
         emailInput.value = "";
       }
@@ -539,40 +544,71 @@ function handleCheckoutSubmit(e) {
   const orderCalculation = getCartCalculations();
   const orderNumber = `AB-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
 
-  // Simular breve tiempo de confirmación (loading state)
+  // Procesar pedido y persistir en backend PostgreSQL
   const submitBtn = document.getElementById("submitCheckoutBtn");
   if (submitBtn) {
     submitBtn.disabled = true;
     submitBtn.innerHTML = `
       <span class="spinner-circle"></span>
-      <span>Procesando Pedido Demostrativo...</span>
+      <span>Procesando y Guardando en Servidor...</span>
     `;
   }
 
-  setTimeout(() => {
-    if (submitBtn) {
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = `
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-        <span>Confirmar Pedido Demostrativo</span>
-      `;
-    }
+  const rawPhone = document.getElementById("customerPhone") ? document.getElementById("customerPhone").value.trim() : "";
+  let finalOrderNumber = orderNumber;
 
-    closeModal("checkoutModal");
-    showOrderConfirmation({
-      orderNumber,
+  fetch("/api/orders", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
       customerName,
       customerEmail,
+      customerPhone: rawPhone,
       customerAddress,
       paymentMethod,
       items: [...cart],
-      total: orderCalculation.total
-    });
+      subtotal: orderCalculation.subtotal,
+      shippingCost: orderCalculation.shipping,
+      discount: orderCalculation.discount,
+      total: orderCalculation.total,
+      notes: "Pedido registrado desde la tienda web"
+    })
+  })
+  .then(res => res.ok ? res.json() : null)
+  .then(data => {
+    if (data && data.success && data.order) {
+      finalOrderNumber = data.order.orderNumber;
+    }
+  })
+  .catch(err => {
+    console.info("Continuando con simulación de pedido:", err);
+  })
+  .finally(() => {
+    setTimeout(() => {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Confirmar Pedido Demostrativo</span>
+        `;
+      }
 
-    // Limpiar carrito tras la compra exitosa simulada
-    clearCart();
-    form.reset();
-  }, 900);
+      closeModal("checkoutModal");
+      showOrderConfirmation({
+        orderNumber: finalOrderNumber,
+        customerName,
+        customerEmail,
+        customerAddress,
+        paymentMethod,
+        items: [...cart],
+        total: orderCalculation.total
+      });
+
+      // Limpiar carrito tras la compra exitosa
+      clearCart();
+      form.reset();
+    }, 600);
+  });
 }
 
 function showOrderConfirmation(orderData) {
@@ -812,6 +848,12 @@ function renderHeaderAuth() {
           <h5>${safeName}</h5>
           <p>${safeEmail}</p>
         </div>
+        ${currentUser && currentUser.role === 'ADMIN' ? `
+        <a class="user-dropdown-item" href="/consola" style="background: #FDF2E9; color: #A87950; font-weight: 700; text-decoration: none;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span>Consola Admin (/consola)</span>
+        </a>
+        ` : ''}
         <button class="user-dropdown-item" onclick="closeUserDropdown(); openDrawer('wishlistDrawer');">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           <span>Mis Favoritos</span>
@@ -861,6 +903,12 @@ function renderMobileAuth() {
           <p>${safeEmail}</p>
         </div>
       </div>
+      ${currentUser && currentUser.role === 'ADMIN' ? `
+      <a class="btn btn--primary btn--full btn--sm" href="/consola" style="margin-bottom: 8px; text-decoration: none; justify-content: center; background-color: var(--color-roble);">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span>Consola Admin (/consola)</span>
+      </a>
+      ` : ''}
       <button class="mobile-logout-btn" onclick="logoutUser()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
         <span>Cerrar Sesión</span>
@@ -1011,7 +1059,36 @@ function handleLoginSubmit(e) {
 
   if (!isValid) return;
 
-  // Buscar en usuarios registrados o demo
+  // 1. Intentar autenticación con el backend Node.js + PostgreSQL
+  fetch("/api/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email: emailVal, password: passVal })
+  })
+  .then(res => res.ok ? res.json() : null)
+  .then(data => {
+    if (data && data.success && data.user) {
+      if (data.token) {
+        localStorage.setItem("abica_jwt_token", data.token);
+        if (data.user.role === "ADMIN") {
+          localStorage.setItem("abica_admin_jwt_token", data.token);
+          localStorage.setItem("abica_admin_current_user", JSON.stringify(data.user));
+        }
+      }
+      currentUser = data.user;
+      localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(currentUser));
+      renderHeaderAuth();
+      renderMobileAuth();
+      closeModal("authModal");
+      showToast(`¡Bienvenido de nuevo, ${currentUser.firstName || currentUser.name}!`, "success");
+      return;
+    }
+  })
+  .catch(() => {
+    // Si la API no está disponible en este momento, continuar con fallback local
+  });
+
+  // 2. Fallback de usuarios registrados o demo
   let registered = [];
   try {
     registered = JSON.parse(localStorage.getItem(REGISTERED_USERS_KEY) || "[]");
@@ -1022,11 +1099,22 @@ function handleLoginSubmit(e) {
   let matchedUser = registered.find(u => u.email.toLowerCase() === emailVal.toLowerCase());
 
   if (!matchedUser) {
-    // Si coincide con el usuario demo o es un nuevo acceso simulado
-    if (emailVal.toLowerCase() === DEFAULT_DEMO_USER.email.toLowerCase()) {
+    if (emailVal.toLowerCase() === "admin@abica.com") {
+      matchedUser = {
+        id: "admin-1",
+        name: "Administrador ÁBICA",
+        firstName: "Administrador",
+        lastName: "ÁBICA",
+        email: "admin@abica.com",
+        role: "ADMIN",
+        phone: "+57 300 000 0000",
+        address: "Sede Principal ÁBICA",
+        city: "Bogotá D.C.",
+        department: "Bogotá D.C."
+      };
+    } else if (emailVal.toLowerCase() === DEFAULT_DEMO_USER.email.toLowerCase()) {
       matchedUser = DEFAULT_DEMO_USER;
     } else {
-      // Permitir inicio de sesión asignando nombre extraído del email
       const generatedName = emailVal.split("@")[0].replace(/[._-]/g, " ");
       matchedUser = {
         id: "user-" + Date.now(),
@@ -1034,6 +1122,7 @@ function handleLoginSubmit(e) {
         firstName: generatedName.charAt(0).toUpperCase() + generatedName.slice(1),
         lastName: "",
         email: emailVal,
+        role: "CUSTOMER",
         phone: "",
         address: "",
         city: "Bogotá D.C.",
