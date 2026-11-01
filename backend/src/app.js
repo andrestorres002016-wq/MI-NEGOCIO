@@ -49,15 +49,15 @@ app.use('/api/subscribers', subscriberRoutes);
 
 // Servir la Consola Administrativa en /consola (o /consola/)
 app.get(['/consola', '/consola/'], (req, res) => {
-  res.sendFile(path.join(__dirname, '../../consola.html'));
+  res.sendFile(path.join(__dirname, '../../frontend/consola.html'));
 });
 
 // Servir estáticos de la tienda (frontend)
-app.use(express.static(path.join(__dirname, '../../')));
+app.use(express.static(path.join(__dirname, '../../frontend')));
 
 // Fallback para SPA o navegación directa a la tienda
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../index.html'));
+  res.sendFile(path.join(__dirname, '../../frontend/index.html'));
 });
 
 // Middleware centralizado de manejo de errores

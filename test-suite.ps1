@@ -8,6 +8,8 @@ $totalTests = 0
 $passedTests = 0
 $failedTests = 0
 
+$base = if (Test-Path "frontend/index.html") { "frontend/" } else { "" }
+
 function Run-Test {
     param(
         [string]$Category,
@@ -40,20 +42,20 @@ Write-Host "==========================================================" -Foregro
 Write-Host "`n1. Verificación de Integridad de Archivos y Sintaxis" -ForegroundColor Yellow
 
 Run-Test "Archivos" "Todos los archivos críticos del proyecto existen" {
-    $files = @("index.html", "css/styles.css", "js/products.js", "js/cart.js", "js/filters.js", "js/seo-helper.js", "js/security.js", "js/app.js", "robots.txt", "sitemap.xml", ".htaccess", "_headers")
+    $files = @("${base}index.html", "${base}css/styles.css", "${base}js/products.js", "${base}js/cart.js", "${base}js/filters.js", "${base}js/seo-helper.js", "${base}js/security.js", "${base}js/app.js", "${base}robots.txt", "${base}sitemap.xml", "${base}.htaccess", "${base}_headers")
     $missing = $files | Where-Object { -not (Test-Path $_) }
     return ($missing.Count -eq 0)
 }
 
 Run-Test "CSS" "Balance perfecto de llaves en css/styles.css" {
-    $content = Get-Content "css/styles.css" -Raw
+    $content = Get-Content "${base}css/styles.css" -Raw
     $openCount = ([regex]::Matches($content, '\{')).Count
     $closeCount = ([regex]::Matches($content, '\}')).Count
     return ($openCount -eq $closeCount -and $openCount -gt 500)
 }
 
 Run-Test "HTML" "Balance perfecto de etiquetas críticas en index.html" {
-    $html = Get-Content "index.html" -Raw
+    $html = Get-Content "${base}index.html" -Raw
     $divOpen = ([regex]::Matches($html, '<div[\s>]')).Count
     $divClose = ([regex]::Matches($html, '</div>')).Count
     $sectionOpen = ([regex]::Matches($html, '<section[\s>]')).Count
@@ -71,7 +73,7 @@ Run-Test "HTML" "Balance perfecto de etiquetas críticas en index.html" {
 # ------------------------------------------------------------------------------
 Write-Host "`n2. Verificación del Sistema 100% Responsive (7 Breakpoints)" -ForegroundColor Yellow
 
-$cssContent = Get-Content "css/styles.css" -Raw
+$cssContent = Get-Content "${base}css/styles.css" -Raw
 
 $breakpoints = @("1200px", "1024px", "900px", "768px", "600px", "480px", "360px")
 foreach ($bp in $breakpoints) {
@@ -93,7 +95,7 @@ Run-Test "Responsive" "Micro-optimizaciones móviles: scroll-padding-top y touch
 # ------------------------------------------------------------------------------
 Write-Host "`n3. Verificación de SEO & AEO (Search & Answer Engine Optimization)" -ForegroundColor Yellow
 
-$htmlContent = Get-Content "index.html" -Raw
+$htmlContent = Get-Content "${base}index.html" -Raw
 
 Run-Test "SEO" "Metadatos canónicos, robots y geo-tags presentes en <head>" {
     $hasCanonical = $htmlContent -match '<link\s+rel="canonical"\s+href="https://abica\.com\.co/"'
@@ -129,8 +131,8 @@ Run-Test "AEO" "FAQ ampliado con preguntas factuales sobre Garantía FSC y Aseso
 }
 
 Run-Test "SEO" "Sitemap XML existe, es XML válido y contiene extensiones de imágenes" {
-    if (-not (Test-Path "sitemap.xml")) { return $false }
-    $rawContent = Get-Content "sitemap.xml" -Raw
+    if (-not (Test-Path "${base}sitemap.xml")) { return $false }
+    $rawContent = Get-Content "${base}sitemap.xml" -Raw
     $xml = [xml]$rawContent
     $urlNodes = $xml.GetElementsByTagName("url")
     $hasUrls = $urlNodes.Count -ge 5
@@ -139,8 +141,8 @@ Run-Test "SEO" "Sitemap XML existe, es XML válido y contiene extensiones de im�
 }
 
 Run-Test "AEO" "Robots.txt contiene directivas explícitas para rastreadores de IA (GPTBot, PerplexityBot, ClaudeBot)" {
-    if (-not (Test-Path "robots.txt")) { return $false }
-    $robots = Get-Content "robots.txt" -Raw
+    if (-not (Test-Path "${base}robots.txt")) { return $false }
+    $robots = Get-Content "${base}robots.txt" -Raw
     $hasGpt = $robots -match 'User-agent:\s*GPTBot'
     $hasPerplexity = $robots -match 'User-agent:\s*PerplexityBot'
     $hasClaude = $robots -match 'User-agent:\s*ClaudeBot'
@@ -164,8 +166,8 @@ Run-Test "OpenGraph" "Metadatos Open Graph completos en index.html (og:image:sec
 }
 
 Run-Test "OpenGraph" "Módulo js/seo-helper.js implementa gestión dinámica de OG y Deep Linking" {
-    if (-not (Test-Path "js/seo-helper.js")) { return $false }
-    $seoHelper = Get-Content "js/seo-helper.js" -Raw
+    if (-not (Test-Path "${base}js/seo-helper.js")) { return $false }
+    $seoHelper = Get-Content "${base}js/seo-helper.js" -Raw
     $hasSetProduct = $seoHelper -match 'setProductOpenGraph'
     $hasReset = $seoHelper -match 'resetOpenGraph'
     $hasApply = $seoHelper -match 'applyOpenGraph'
@@ -175,7 +177,7 @@ Run-Test "OpenGraph" "Módulo js/seo-helper.js implementa gestión dinámica de 
 }
 
 Run-Test "OpenGraph" "Modal de producto integra botón de compartir y actualiza OG al abrirse" {
-    $appJs = Get-Content "js/app.js" -Raw
+    $appJs = Get-Content "${base}js/app.js" -Raw
     $hasShareBtn = $appJs -match 'shareProduct\(\$\{product\.id\}\)'
     $hasDynamicCall = $appJs -match 'AbicaSEO\.setProductOpenGraph\(product\)'
     $hasResetCall = $appJs -match 'AbicaSEO\.resetOpenGraph\(\)'
@@ -197,8 +199,8 @@ Run-Test "Seguridad" "Cabeceras y meta-tags de seguridad en index.html (CSP, X-F
 }
 
 Run-Test "Seguridad" "Módulo js/security.js implementa sanitización XSS, anti-clickjacking, Luhn y RateLimiting" {
-    if (-not (Test-Path "js/security.js")) { return $false }
-    $secJs = Get-Content "js/security.js" -Raw
+    if (-not (Test-Path "${base}js/security.js")) { return $false }
+    $secJs = Get-Content "${base}js/security.js" -Raw
     $hasFrameBust = $secJs -match 'window\.top\s*!==\s*window\.self'
     $hasSanitizeHtml = $secJs -match 'function sanitizeHTML'
     $hasSanitizeUrl = $secJs -match 'function sanitizeURL'
@@ -215,7 +217,7 @@ Run-Test "Seguridad" "Campos trampa Honeypot presentes en los 4 formularios del 
 }
 
 Run-Test "Seguridad" "Protección anti-tampering de precios en js/cart.js" {
-    $cartJs = Get-Content "js/cart.js" -Raw
+    $cartJs = Get-Content "${base}js/cart.js" -Raw
     $hasVerifyInStorage = $cartJs -match 'sanitizeAndVerifyCartItem'
     $hasCanonicalPrice = $cartJs -match 'price:\s*product\.price'
     $hasBoundQuantity = $cartJs -match 'Math\.min\(99'
@@ -223,7 +225,7 @@ Run-Test "Seguridad" "Protección anti-tampering de precios en js/cart.js" {
 }
 
 Run-Test "Seguridad" "Protección contra fuerza bruta y rate-limiting en checkout, login y newsletter" {
-    $appJs = Get-Content "js/app.js" -Raw
+    $appJs = Get-Content "${base}js/app.js" -Raw
     $hasCheckoutLimit = $appJs -match 'rateLimiter\.check\("checkout"'
     $hasLoginLimit = $appJs -match 'rateLimiter\.check\("auth_login"'
     $hasNewsletterLimit = $appJs -match 'rateLimiter\.check\("newsletter"'
@@ -231,8 +233,8 @@ Run-Test "Seguridad" "Protección contra fuerza bruta y rate-limiting en checkou
 }
 
 Run-Test "Seguridad" "Configuración de servidor .htaccess con HSTS forzado, bloqueo de .git/.env y Options -Indexes" {
-    if (-not (Test-Path ".htaccess")) { return $false }
-    $htaccess = Get-Content ".htaccess" -Raw
+    if (-not (Test-Path "${base}.htaccess")) { return $false }
+    $htaccess = Get-Content "${base}.htaccess" -Raw
     $hasHsts = $htaccess -match 'Strict-Transport-Security'
     $hasNoIndex = $htaccess -match 'Options -Indexes'
     $hasBlockFiles = $htaccess -match 'FilesMatch'
@@ -241,8 +243,8 @@ Run-Test "Seguridad" "Configuración de servidor .htaccess con HSTS forzado, blo
 }
 
 Run-Test "Seguridad" "Archivo _headers configurado para despliegue en CDN/Edge (Netlify / Cloudflare)" {
-    if (-not (Test-Path "_headers")) { return $false }
-    $headers = Get-Content "_headers" -Raw
+    if (-not (Test-Path "${base}_headers")) { return $false }
+    $headers = Get-Content "${base}_headers" -Raw
     return ($headers -match 'Strict-Transport-Security' -and $headers -match 'X-Frame-Options: DENY')
 }
 
